@@ -1,0 +1,86 @@
+openapi: 3.0.0
+info:
+  title: wajve
+  description: "Go coding challenge"
+  version: 0.0.1
+
+servers:
+  - url: http://localhost:8080/
+    description: Local environment
+
+paths:
+  /api/v1/trivia:
+    get:
+      summary: "Get samples from database by specified parameters"
+      parameters:
+        - in: query
+          name: text
+          schema:
+            type: string
+          description: "String value to filter by text field"
+        - in: query
+          name: number
+          schema:
+            type: integer
+          description: "Number value to filer by number field"
+        - in: query
+          name: found
+          schema:
+            type: boolean
+          description: "Boolean value to filter by found field"
+        - in: query
+          name: type
+          schema:
+            type: string
+          description: "String value to filter by type field"
+      responses:
+        200:
+          description: "Success"
+        400:
+          description: "Bad Request"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RequestError"
+        500:
+          description: "Internal Server Error"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RequestError"
+
+  /api/v1/trivia/populate:
+    post:
+      summary: "Populate database from specified JSON file."
+      requestBody:
+        $ref: "#/components/requestBodies/PopulateRequestBody"
+      responses:
+        200:
+          description: "Success response. Database was populated."
+        500:
+          description: "Internal Server Error"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RequestError"
+
+components:
+  schemas:
+    RequestError:
+      type: object
+      properties:
+        error:
+          type: string
+          description: Error string representation
+
+  requestBodies:
+    PopulateRequestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            additionalProperties:
+              type: string
+            example:
+              path: "db.json"

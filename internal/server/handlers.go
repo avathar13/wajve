@@ -79,8 +79,6 @@ func (h *Handler) Populate(writer http.ResponseWriter, request *http.Request) {
 
 		return
 	}
-
-	_, _ = writer.Write([]byte("OK"))
 }
 
 func (h *Handler) writeRequestError(writer http.ResponseWriter, code int, msg string, err error) {

@@ -14,6 +14,9 @@ func (h *Handler) initRoutes() *mux.Router {
 	router.Use(metrics.NewMiddleware().Handle)    // add middleware to measure http requests duration and count
 	router.Handle("/metrics", promhttp.Handler()) // host for prometheus metrics
 
+	fs := http.FileServer(http.Dir("./internal/swagger/"))
+	router.PathPrefix("/swagger/").Handler(http.StripPrefix("/swagger/", fs)) // route to swagger file
+
 	api := router.PathPrefix("/api/v1").Subrouter()
 	api.HandleFunc("/trivia", h.Get).Methods(http.MethodGet)
 	api.HandleFunc("/trivia/populate", h.Populate).Methods(http.MethodPost)
