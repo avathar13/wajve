@@ -1,0 +1,7 @@
+linters:
+  enable-all: true
+  disable:
+    - gci
+    - gofumpt
+    - gomnd
+  fast: false

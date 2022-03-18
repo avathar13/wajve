@@ -1,0 +1,15 @@
+http_server:
+  host: 127.0.0.1
+  port: 8080
+  read_timeout: 1s
+  write_timeout: 2s
+
+mongo:
+  protocol: "mongodb"
+  host: "localhost"
+  port: 27017
+  username: ""
+  password: ""
+  write_concern: "majority"
+  max_pool_size: 100
+  connect_timeout: 10000
