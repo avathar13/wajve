@@ -3,7 +3,9 @@
 - make lint - run linters. 
 See linters config in [.golangci.yaml](.golangci.yaml).
 
-API calls are described in [Swagger](http://localhost:8080/swagger/#/).
+API calls are described in Swagger: http://localhost:8080/swagger/#/
+
+Also, you can take a look on program metrics here: http://localhost:8080/metrics
 
 ##Technical choices
 - Configs in YAML files: [configs](configs). Separate config file for local environment in /dev folder (git ignored).
